@@ -1,10 +1,14 @@
 const fetchuser = require('../middleware/fetchuser');
 const Message = require('../models/Message')
+const User = require('../models/User');
 const express = require('express');
 const router = express.Router();
-const { ObjectId } = require('mongodb')
-// GET all the chats of a user on 'http://localhost:5000/api/messaging/allchat/:id'
+const { ObjectId } = require('mongodb');
+
+// GET all the chats of a user on 'http://localhost:5000/api/messaging/allchat'
 router.get('/allchat', fetchuser, async (req, res) => {
+
+    // get only the users not the whole msg
 
     try {
         const allchats = await Message.aggregate([
@@ -12,18 +16,27 @@ router.get('/allchat', fetchuser, async (req, res) => {
                 $match: { senderId: new ObjectId(String(req.user.id)) }
             },
             {
-                $sort: { sentAt: 1 }
+                $sort: { sentAt: -1 }
             },
+
             {
                 $group: {
                     _id: "$receiverId",
-                    messages: { $push: "$$ROOT" }
+                    //messages: { $push: "$$ROOT" }
                 }
             }
 
         ]);
+        let allusers = [];
+
+        for (i = 0; i, i < allchats.length; i++) {
+            const oneuser = await User.findById(allchats[i]);
+            allusers.push(oneuser);
+        }
+
+        //console.log(allusers)
         //console.log(allchats)
-        return res.status(201).json({ allchats });
+        return res.status(201).json({ allusers });
 
     } catch (error) {
         return res.status(400).json({ error: "Something went wrong" });
