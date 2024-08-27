@@ -32,6 +32,10 @@
   color: blue;
 }
 
+.nav-link:active {
+  color: blue;
+}
+
 .card {
   border-radius: 0;
 }

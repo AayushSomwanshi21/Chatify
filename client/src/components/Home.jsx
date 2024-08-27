@@ -11,10 +11,10 @@ const Home = (props) => {
 
     useEffect(() => {
         getallmsg();
-    }, [])
+    }, []);
 
     return (
-        <div className="ml-4" style={{ marginLeft: '100px' }}>
+        <div style={{ marginLeft: '100px' }}>
             <Card style={{ width: '30rem' }} className="card" bg="dark">
                 <Card.Header style={{ display: "flex", height: '4rem', fontSize: "1.5rem", textAlign: "center", color: "white", justifyContent: "center", alignItems: "center" }}>CHATS</Card.Header>
 

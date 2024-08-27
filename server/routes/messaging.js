@@ -23,13 +23,21 @@ router.get('/allchat', fetchuser, async (req, res) => {
                 $group: {
                     _id: "$receiverId",
                     //messages: { $push: "$$ROOT" }
+                },
+
+            },
+            {
+
+                $sort: {
+                    _id: -1
                 }
+
             }
 
         ]);
         let allusers = [];
-
-        for (i = 0; i, i < allchats.length; i++) {
+        //console.log(allchats)
+        for (i = 0; i < allchats.length; i++) {
             const oneuser = await User.findById(allchats[i]);
             allusers.push(oneuser);
         }
