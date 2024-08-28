@@ -39,3 +39,8 @@
 .card {
   border-radius: 0;
 }
+
+.card:hover {
+  background-color: #6d7073;
+  transition: 0.25s;
+}
