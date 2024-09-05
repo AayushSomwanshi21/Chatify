@@ -44,3 +44,12 @@
   background-color: #6d7073;
   transition: 0.25s;
 }
+
+.home {
+  width: 30%;
+}
+
+.chat-item {
+
+  width: 70%;
+}
