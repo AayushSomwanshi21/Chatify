@@ -13,6 +13,7 @@ import MsgContext from "./context/MsgContext";
 import Login from './components/Login';
 import { AuthState } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
+import Profile from './components/Profile';
 function App() {
 
 
@@ -33,6 +34,7 @@ function App() {
                   <PrivateRoute><Home /></PrivateRoute>
                 }
                 />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="/chats/:id" element={
                   <PrivateRoute>
                     <div style={{ display: 'flex', flexGrow: 1 }}>
@@ -42,6 +44,7 @@ function App() {
                   </PrivateRoute>
 
                 } />
+
               </Routes>
             </div>
           </div>
