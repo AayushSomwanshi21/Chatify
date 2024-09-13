@@ -107,17 +107,48 @@ router.post('/login', [
 
 // Get User details after login "/api/auth/getuser"
 
-router.post('/getuser', fetchuser, async (req, res) => {
+router.get('/getuser', fetchuser,
+    async (req, res) => {
 
-    try {
-        const userId = req.user.id
-        const user = await User.findById(userId).select("-password");
-        res.send(user);
-    } catch (error) {
-        console.log(error.message);
-        res.status(500).send("Internal server error occured");
+        try {
+            const userId = req.user.id
+            const user = await User.findById(userId).select("-password");
+            res.send(user);
+        } catch (error) {
+            console.log(error.message);
+            res.status(500).send("Internal server error occured");
+        }
+
+    });
+
+// Update Username 
+router.post('/updateuser', [body('name', 'Enter a valid name').isLength({ min: 5 })], fetchuser,
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        const { name } = req.body;
+
+        try {
+
+            const user = await User.findByIdAndUpdate(
+                req.user.id,
+                { name },
+                { new: true, select: "-password" }
+            );
+            if (!user) {
+                return res.status(404).json({ error: "User not found" });
+            }
+            res.json({ message: "Username updated successfully", user });
+
+        } catch (error) {
+            console.error(error.message);
+            res.status(500).send("Server error");
+        }
+
+
     }
-
-});
-
+);
 module.exports = router;
