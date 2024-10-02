@@ -23,7 +23,7 @@ const AuthState = ({ children }) => {
                 'Content-Type': 'application/json',
                 'auth-token': localStorage.getItem('token')
             },
-            body: JSON.stringify(name)
+            body: JSON.stringify({ name })
         });
         const json = await response.json();
         console.log(json);

@@ -2,11 +2,13 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import profileImage from './Screenshot(22).png';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../context/AuthContext';
 const Profile = () => {
 
     const [username, setUsername] = useState("");
     const [clicked, setClicked] = useState(false);
+    const { updateUser } = useContext(AuthContext);
 
     useEffect(() => {
 
@@ -43,12 +45,18 @@ const Profile = () => {
     }, [])
 
     const iconClick = () => {
-        let currentClick = clicked == true ? false : true
+        let currentClick = clicked === true ? false : true
         setClicked(currentClick)
     }
-    const updateUsername = () => {
-
+    const updateUsername = (event) => {
+        event.preventDefault();
+        updateUser(username);
+        setClicked(false);
     }
+
+    const handleInputChange = (event) => {
+        setUsername(event.target.value);
+    };
 
     return (
         <div style={{ marginLeft: '100px' }}>
@@ -60,11 +68,11 @@ const Profile = () => {
                         <img src={profileImage} alt="profileimg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                     <div style={{ width: 'inherit' }}>
-                        <Form className='mx-5'>
+                        <Form className='mx-5' onSubmit={updateUsername}>
                             <Form.Group className="mb-3">
                                 <Form.Label style={{ color: '#45e64d', fontSize: '1.2rem' }}>Username</Form.Label>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                    <Form.Control style={{ width: '20rem', fontSize: '1.25rem' }} type="text" value={username} disabled={!clicked} />
+                                    <Form.Control style={{ width: '20rem', fontSize: '1.25rem' }} type="text" value={username} disabled={!clicked} onChange={handleInputChange} />
                                     <i class="fa-solid fa-pen-to-square fa-xl" style={{ color: "white" }} onClick={iconClick} ></i>
                                 </div>
                             </Form.Group>
