@@ -151,4 +151,25 @@ router.post('/updateuser', [body('name', 'Enter a valid name').isLength({ min: 5
 
     }
 );
+
+// GET the search results
+
+router.post('/search', fetchuser,
+    async (req, res) => {
+
+        try {
+            const { name } = req.body
+
+            const users = await User.find(
+                {
+                    name: { $regex: name, $options: 'i' }
+                }
+            );
+            res.send(users)
+        } catch (error) {
+            console.log(error.message);
+            res.status(500).send("Internal server error occured");
+        }
+
+    });
 module.exports = router;

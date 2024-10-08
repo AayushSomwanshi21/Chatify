@@ -12,7 +12,7 @@ function Sidebar() {
         <div className="sidebar">
             <Nav className="flex-column">
                 <Nav.Link as={Link} to="/chats" className="nav-link"><i class="fa-regular fa-message fa-lg"></i></Nav.Link>
-                <Nav.Link as={Link} to="/settings" className="nav-link"><i class="fa-solid fa-gear fa-lg"></i></Nav.Link>
+                <Nav.Link as={Link} to="/search" className="nav-link"><i class="fa-solid fa-magnifying-glass fa-lg"></i></Nav.Link>
                 <Nav.Link as={Link} to="/profile" className="nav-link"><i class="fa-regular fa-user fa-lg"></i></Nav.Link>
                 <Nav.Link as={Link} to="/login" className="nav-link"><i class="fa-solid fa-right-from-bracket fa-lg" onClick={logout}></i></Nav.Link>
             </Nav>

@@ -14,6 +14,7 @@ import Login from './components/Login';
 import { AuthState } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import Profile from './components/Profile';
+import Search from './components/Search';
 function App() {
 
 
@@ -42,9 +43,15 @@ function App() {
                       <ChatItem />
                     </div>
                   </PrivateRoute>
-
                 } />
 
+                <Route path="/search" element={
+                  <PrivateRoute>
+                    <div style={{ display: 'flex', flexGrow: 1 }}>
+                      <Search />
+                    </div>
+                  </PrivateRoute>
+                } />
               </Routes>
             </div>
           </div>
