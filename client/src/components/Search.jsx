@@ -47,8 +47,8 @@ const Search = () => {
                     {
                         //build a different component for Chat with a add as a chat option
                     }
-                    {results.map((user, index) => (
-                        <Chat key={index} msg={user} />
+                    {results.map((msg, index) => (
+                        <Chat key={index} msg={msg} />
                     ))}
                 </div>
             </Card>

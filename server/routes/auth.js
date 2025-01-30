@@ -159,10 +159,11 @@ router.post('/search', fetchuser,
 
         try {
             const { name } = req.body
-
+            const loggedInUserId = req.user.id
             const users = await User.find(
                 {
-                    name: { $regex: name, $options: 'i' }
+                    name: { $regex: name, $options: 'i' },
+                    _id: { $ne: loggedInUserId }
                 }
             );
             res.send(users)

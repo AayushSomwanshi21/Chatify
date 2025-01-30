@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const mongoDB = "mongodb+srv://aayushsomwanshi21:altair2104@cluster0.gyt1hyu.mongodb.net/Chatify?retryWrites=true&w=majority&appName=Cluster0";
+const mongoDB = process.env.MONGODB_URL;
 
 async function connectDB() {
     try {
